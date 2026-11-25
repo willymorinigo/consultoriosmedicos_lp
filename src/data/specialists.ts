@@ -12,7 +12,11 @@ import photoAguirre from '@/src/assets/images/general/Psiquiatria_Othon_Aguirre.
 import photoSoulas from '@/src/assets/images/general/Masoterepia_Soulas_Martin.png';
 import photoGeneric from '@/src/assets/images/general/silueta-profesional.svg';
 
-export type CoverageType = 'Obras Sociales y Particulares' | 'Particulares' | 'PAMI y Particulares';
+export type CoverageType =
+  | 'Obra Social y Particulares'
+  | 'Obras Sociales y Particulares'
+  | 'Particulares'
+  | 'PAMI y Particulares';
 
 export interface Specialist {
   id: string;
@@ -21,8 +25,9 @@ export interface Specialist {
   specialtyLabel: string;
   coverage: CoverageType;
   schedule?: string;
+  ageRange?: string;
+  differential?: string;
   appointmentNote?: string;
-  audienceNote?: string;
   whatsappDisplay: string;
   whatsappNumber: string;
   photo: string;
@@ -51,7 +56,10 @@ export const SPECIALISTS: Specialist[] = [
     name: 'Dra. Blanco Evelin',
     specialty: 'Oftalmología',
     specialtyLabel: 'Oftalmólogos',
-    coverage: 'Obras Sociales y Particulares',
+    coverage: 'Obra Social y Particulares',
+    schedule: 'Lun. Mar y Mie. de 16 a 20hs',
+    ageRange: 'Todas las edades',
+    differential: '$25.000',
     appointmentNote: 'Comuníquese solo por WhatsApp',
     whatsappDisplay: '221 3640408',
     whatsappNumber: '5492213640408',
@@ -179,8 +187,8 @@ export const SPECIALISTS: Specialist[] = [
     specialtyLabel: 'Fonoaudióloga',
     coverage: 'Obras Sociales y Particulares',
     schedule: 'Viernes de 17 a 19 hs.',
+    ageRange: 'A partir de 1 año hasta 12 años',
     appointmentNote: 'Atención, solo con turno previo',
-    audienceNote: 'A partir de 1 año hasta 12 años',
     whatsappDisplay: '221 5413811',
     whatsappNumber: '5492215413811',
     photo: photoBotelli,
@@ -230,8 +238,18 @@ export const SPECIALTY_CATEGORIES: string[] = [
 ];
 
 export function buildSpecialistWhatsAppUrl(specialist: Specialist): string {
-  const text = `Hola, quisiera solicitar un turno con ${specialist.name} (${specialist.specialty}) en Consultorios Médicos (Calle 60 N° 1746).`;
-  return `https://wa.me/${specialist.whatsappNumber}?text=${encodeURIComponent(text)}`;
+  const lines = [
+    `Hola, quisiera solicitar un turno en ${CLINIC_INFO.name} (${CLINIC_INFO.address}):`,
+    '',
+    `• *Especialidad:* ${specialist.specialty} - ${specialist.coverage}`,
+    `• *Profesional:* ${specialist.name}`,
+    `• *Días y horarios:* ${specialist.schedule ?? 'A consultar'}`,
+    `• *Edades que atiende:* ${specialist.ageRange ?? 'A consultar'}`,
+    `• *Diferencial:* ${specialist.differential ?? 'A consultar'}`,
+    '',
+    'Quedo a la espera de disponibilidad. ¡Muchas gracias!',
+  ];
+  return `https://wa.me/${specialist.whatsappNumber}?text=${encodeURIComponent(lines.join('\n'))}`;
 }
 
 export function buildGeneralWhatsAppUrl(customMessage?: string): string {

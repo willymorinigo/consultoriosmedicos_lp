@@ -1,4 +1,4 @@
-import { Check, Clock, Copy, MessageCircle, Search, X } from 'lucide-react';
+import { Banknote, Check, Clock, Copy, MessageCircle, Search, Users, X } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import {
   buildSpecialistWhatsAppUrl,
@@ -18,7 +18,7 @@ const COVERAGE_FILTERS: CoverageFilter[] = [
 
 function matchesCoverage(specialist: Specialist, filter: CoverageFilter): boolean {
   if (filter === 'Todas') return true;
-  if (filter === 'Obras Sociales') return specialist.coverage.includes('Obras Sociales');
+  if (filter === 'Obras Sociales') return specialist.coverage.includes('Obra Social') || specialist.coverage.includes('Obras Sociales');
   if (filter === 'PAMI') return specialist.coverage.includes('PAMI');
   if (filter === 'Particulares') return specialist.coverage.includes('Particulares');
   return true;
@@ -204,35 +204,62 @@ export function SpecialtiesDirectory() {
                   <div className="flex items-stretch justify-between gap-2 pt-5 pl-5 sm:pt-6 sm:pl-6 pr-0 min-h-[168px]">
                     {/* Left text content */}
                     <div className="flex-1 min-w-0 pb-4 pr-1">
-                      {/* Unboxed typographic metadata */}
-                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-medium text-zinc-500">
+                      {/* Especialidad - obra social */}
+                      <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-xs font-medium text-zinc-600">
                         <span className="text-red-700 font-semibold">{specialist.specialty}</span>
-                        <span aria-hidden="true">·</span>
+                        <span aria-hidden="true">-</span>
                         <span>{specialist.coverage}</span>
                       </div>
 
-                      <h3 className="font-display text-lg sm:text-xl font-semibold text-zinc-900 mt-2 tracking-tight leading-snug">
+                      <h3 className="font-display text-lg sm:text-xl font-semibold text-zinc-900 mt-1.5 tracking-tight leading-snug">
                         {specialist.name}
                       </h3>
 
-                      <div className="mt-3.5 space-y-1.5 text-sm text-zinc-600">
-                        {specialist.schedule && (
-                          <p className="flex items-start gap-1.5 tabular-nums">
-                            <Clock
-                              className="w-4 h-4 text-zinc-400 shrink-0 mt-0.5"
-                              aria-hidden="true"
-                            />
-                            <span className="text-zinc-800 font-medium">{specialist.schedule}</span>
-                          </p>
-                        )}
+                      <div className="mt-3.5 space-y-2 text-xs sm:text-sm text-zinc-600">
+                        <p className="flex items-start gap-1.5 tabular-nums">
+                          <Clock
+                            className="w-4 h-4 text-zinc-400 shrink-0 mt-0.5"
+                            aria-hidden="true"
+                          />
+                          <span>
+                            {specialist.schedule ? (
+                              <span className="text-zinc-800 font-medium">{specialist.schedule}</span>
+                            ) : (
+                              <span className="text-zinc-500">Horarios a consultar</span>
+                            )}
+                          </span>
+                        </p>
 
-                        {specialist.audienceNote && (
-                          <p className="text-zinc-700 text-xs sm:text-sm">{specialist.audienceNote}</p>
-                        )}
+                        <p className="flex items-start gap-1.5">
+                          <Users
+                            className="w-4 h-4 text-zinc-400 shrink-0 mt-0.5"
+                            aria-hidden="true"
+                          />
+                          <span>
+                            {specialist.ageRange ? (
+                              <span className="text-zinc-800">{specialist.ageRange}</span>
+                            ) : (
+                              <span className="text-zinc-500">Edades a consultar</span>
+                            )}
+                          </span>
+                        </p>
 
-                        {specialist.appointmentNote && (
-                          <p className="text-zinc-500 text-xs">{specialist.appointmentNote}</p>
-                        )}
+                        <p className="flex items-start gap-1.5 tabular-nums">
+                          <Banknote
+                            className="w-4 h-4 text-zinc-400 shrink-0 mt-0.5"
+                            aria-hidden="true"
+                          />
+                          <span>
+                            <span className="text-zinc-500">Diferencial: </span>
+                            {specialist.differential ? (
+                              <strong className="font-mono font-semibold text-zinc-900">
+                                {specialist.differential}
+                              </strong>
+                            ) : (
+                              <span className="text-zinc-500">A consultar</span>
+                            )}
+                          </span>
+                        </p>
                       </div>
                     </div>
 
