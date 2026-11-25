@@ -1,0 +1,6 @@
+{
+  "name": "Consultorios Médicos — La Plata",
+  "description": "Cartilla médica, turnos directos por WhatsApp, ubicación y contacto general de Consultorios Médicos en Calle 60 N° 1746 e/ 29 y 30, La Plata.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

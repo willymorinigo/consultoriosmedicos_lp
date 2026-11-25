@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 754 960" width="754" height="960" fill="none">
+  <defs>
+    <clipPath id="circleClip">
+      <circle cx="515" cy="480" r="444" />
+    </clipPath>
+  </defs>
+
+  <!-- Soft neutral fill matching studio wall background of portraits -->
+  <circle cx="515" cy="480" r="444" fill="#ECEAE5" />
+
+  <!-- Subtle clinician bust silhouette clipped inside the right-anchored circle -->
+  <g clip-path="url(#circleClip)">
+    <!-- Shoulders / Coat -->
+    <path
+      d="M225 975 C235 790 340 705 478 705 C616 705 720 790 735 975 Z"
+      fill="#C4C1BA"
+    />
+    <!-- Coat lapel / inner V -->
+    <path
+      d="M405 712 L478 858 L551 712 C528 707 504 705 478 705 C452 705 428 707 405 712 Z"
+      fill="#DFDDD7"
+    />
+    <!-- Neck -->
+    <rect x="434" y="610" width="88" height="115" rx="40" fill="#B5B2AA" />
+    <!-- Hair back subtle volume -->
+    <path
+      d="M342 468 C342 360 400 302 478 302 C556 302 614 360 614 468 L624 620 C624 645 595 660 572 652 L560 560 L396 560 L384 652 C361 660 332 645 332 620 Z"
+      fill="#A8A59E"
+    />
+    <!-- Head -->
+    <ellipse cx="478" cy="472" rx="112" ry="136" fill="#B5B2AA" />
+  </g>
+
+  <!-- Crimson circular arc border matching uploaded portraits -->
+  <circle
+    cx="515"
+    cy="480"
+    r="444"
+    stroke="#B5161B"
+    stroke-width="22"
+    fill="none"
+  />
+</svg>
