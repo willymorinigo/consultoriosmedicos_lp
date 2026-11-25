@@ -123,7 +123,7 @@ export function SpecialtiesDirectory() {
             <div
               role="group"
               aria-label="Filtrar por cobertura"
-              className="flex items-center gap-1 p-1 bg-zinc-200/70 rounded-lg w-full sm:w-auto overflow-x-auto"
+              className="grid grid-cols-2 sm:flex sm:items-center gap-1 p-1 bg-zinc-200/70 rounded-lg w-full sm:w-auto"
             >
               {COVERAGE_FILTERS.map((filter) => {
                 const active = coverageFilter === filter;
@@ -132,7 +132,7 @@ export function SpecialtiesDirectory() {
                     key={filter}
                     type="button"
                     onClick={() => setCoverageFilter(filter)}
-                    className={`flex-1 sm:flex-initial min-h-[40px] sm:min-h-0 px-3 py-2 sm:py-1.5 text-xs sm:text-sm font-medium rounded-md transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-red-700 ${
+                    className={`min-h-[40px] sm:min-h-0 px-3 py-2 sm:py-1.5 text-xs sm:text-sm font-medium rounded-md transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-red-700 ${
                       active
                         ? 'bg-white text-zinc-900 shadow-xs'
                         : 'text-zinc-600 hover:text-zinc-900'
@@ -145,11 +145,11 @@ export function SpecialtiesDirectory() {
             </div>
           </div>
 
-          {/* Specialty Quick Filter Bar: horizontal swipe rail on mobile, wrapped grid on desktop */}
+          {/* Specialty Quick Filter Bar: wrapped cleanly on all screens without horizontal scroll */}
           <div
             role="group"
             aria-label="Filtros rápidos por especialidad"
-            className="mt-4 flex sm:flex-wrap gap-2 overflow-x-auto sm:overflow-visible -mx-4 px-4 sm:mx-0 sm:px-0 pb-2 sm:pb-0 snap-x"
+            className="mt-4 flex flex-wrap gap-1.5 sm:gap-2"
           >
             {SPECIALTY_CATEGORIES.map((specialty) => {
               const active = selectedSpecialty === specialty;
@@ -158,7 +158,7 @@ export function SpecialtiesDirectory() {
                   key={specialty}
                   type="button"
                   onClick={() => setSelectedSpecialty(specialty)}
-                  className={`snap-start min-h-[44px] sm:min-h-0 px-4 sm:px-3.5 py-2 text-sm font-medium rounded-lg border transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-red-700 ${
+                  className={`min-h-[40px] sm:min-h-0 px-3 sm:px-3.5 py-2 text-xs sm:text-sm font-medium rounded-lg border transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-red-700 ${
                     active
                       ? 'bg-zinc-900 text-white border-zinc-900'
                       : 'bg-white text-zinc-700 border-zinc-200 hover:border-zinc-400 hover:text-zinc-950'
